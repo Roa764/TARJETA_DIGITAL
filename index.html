@@ -572,12 +572,34 @@
     </div>
   </div>
 
+  <button class="save-btn" onclick="downloadVCard()">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/><path d="M12 12v5m0 0-2-2m2 2 2-2"/></svg>
+    Guardar contacto
+  </button>
+
   <footer>OTT DAROTELL &middot; Automatizaci&oacute;n Integral con IA</footer>
 </div>
 
 <div class="toast" id="toast"></div>
 
 <script>
+function downloadVCard(){
+  const vcard = [
+    'BEGIN:VCARD',
+    'VERSION:3.0',
+    'N:Roa Cervantes;Jordan Jose;;Ing.;',
+    'FN:Ing. Jordan Jose Roa Cervantes',
+    'ORG:OTT DAROTELL',
+    'TITLE:Director de Operaciones',
+    'TEL;TYPE=CELL:+525547729637',
+    'EMAIL:ottdarotell@gmail.com',
+    'END:VCARD'
+  ].join('\r\n');
+
+  const dataUrl = 'data:text/vcard;charset=utf-8,' + encodeURIComponent(vcard);
+  window.location.href = dataUrl;
+}
+
 function copyFallback(event, value, msg){
   if(navigator.clipboard){
     navigator.clipboard.writeText(value).catch(()=>{});
